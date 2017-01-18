@@ -1,0 +1,35 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+# style-assets
+
+Logos, graphics and other style assets that presenters may find useful for use in slides
+
+```{r, results='asis', echo=FALSE}
+
+library(purrr)
+
+figs <- dir("fig", full.names = TRUE)
+
+md <- function(fig, img = TRUE) 
+	paste0(ifelse(img, "!", ""), "[", fig, "]", "(", fig, ")")
+
+itemize <- function(fig) 
+	return(paste0("  ", md(fig, img = FALSE),  " : \n  ", md(fig), "  "))
+
+out <- map_chr(figs, itemize)
+
+cat(sep = "\n\n", out)
+
+```
